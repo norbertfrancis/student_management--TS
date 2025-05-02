@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import session from "express-session";
+import mongoose from "mongoose"
+
 
 dotenv.config();
 
@@ -37,6 +39,13 @@ import adminRoute from "./routes/admin.routes.js";
 
 app.use("/", studentRoute);
 app.use("/admin", adminRoute);
+
+mongoose.connect("mongodb://localhost:27017/student-management", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+} as any)
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((err) => console.error("MongoDB connection error:", err));
 
 import {startServer} from "./config/server.config.js";
 startServer(app);

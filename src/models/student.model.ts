@@ -1,16 +1,15 @@
-export interface Student {
-    id : number;
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface IStudent extends Document {
+    id: number;
     name: string;
-    age:number;
+    age: number;
 }
 
-export class StudentStore {
-    private students: Student[] = [];
+const studentSchema: Schema = new Schema({
+    id: { type: Number, required: true, unique: true },
+    name: { type: String, required: true },
+    age: { type: Number, required: true }
+});
 
-    addStudent(student: Student): void {
-        this.students.push(student);
-    }
-    getStudents(): Student[] {
-        return this.students;
-    }
-}
+export default mongoose.model<IStudent>("Student", studentSchema);
