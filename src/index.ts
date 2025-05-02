@@ -38,6 +38,5 @@ import adminRoute from "./routes/admin.routes.js";
 app.use("/", studentRoute);
 app.use("/admin", adminRoute);
 
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
-});
+import {startServer} from "./config/server.config.js";
+startServer(app);
